@@ -25,7 +25,7 @@
         [[(reallyGreedyPerson)]] 999
 
         (return 0 (lll {
-          (when (= @0 (caller)) {
+          (when (= @@0 (caller)) {
             (if (> 1 @@reallyGenerousPerson)
               (send [[0]] (* allgas (/ @@reallyGenerousPerson 1000)))
               [[(reallyGenerousPerson)]] 0
@@ -33,7 +33,7 @@
             (stop)
           })
           
-          (when (= @1 (caller)) {
+          (when (= @@1 (caller)) {
             (if (> 0 @@reallyGreedyPerson)
               (send [[1]] (* allgas (/ @@reallyGreedyPerson 1000)))
               [[(reallyGreedyPerson)]] 0
