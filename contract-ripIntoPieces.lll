@@ -15,28 +15,31 @@
   (def 'ripIntoPieces 2)
 
   (return 0 (lll {
-    (when (= (calldataload 0x0) ripIntoPieces) { 
+    (when (= (calldataload 0x0) ripIntoPieces) {
       [[0xDEAD]] (create 0 0 (lll {
+        (def 'reallyGenerousPerson reallyGenerousPerson)
+        (def 'reallyGreedyPerson reallyGreedyPerson)
+        
         ;; reallyGenerousPerson gets 0.001 and reallyGreedyPerson gets 0.999
         [[0]] reallyGenerousPerson
-        [[(reallyGenerousPerson)]] 1
+        [[reallyGenerousPerson]] 1
 
         [[1]] reallyGreedyPerson
-        [[(reallyGreedyPerson)]] 999
+        [[reallyGreedyPerson]] 999
 
         (return 0 (lll {
           (when (= @@0 (caller)) {
-            (if (> 1 @@reallyGenerousPerson)
+            (if (> 0 @@reallyGenerousPerson)
               (send @@0 (* allgas (/ @@reallyGenerousPerson 1000)))
-              [[(reallyGenerousPerson)]] 0
+              [[reallyGenerousPerson]] 0
             )
             (stop)
           })
           
           (when (= @@1 (caller)) {
             (if (> 0 @@reallyGreedyPerson)
-              (send @@1 (* allgas (/ @@reallyGreedyPerson 1000)))
-              [[(reallyGreedyPerson)]] 0
+              (send @@1 (- allgas 10000))
+              [[reallyGreedyPerson]] 0
             )
             (stop)
           })
