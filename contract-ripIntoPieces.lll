@@ -1,0 +1,48 @@
+; file contract-ripIntoPieces.lll
+; author Generous Alex <nessence@gmail.com> and greedy Jutta <jutta.steiner@posteo.de>
+; date 2014
+;
+; Description
+; Contract template to spin off a contract if calldata flags "ripIntoPieces" that 
+; distributes remaining gas to reallyGreedyPerson and reallyGenerousPerson upon respective calls by persosn
+; before master contract is ripped into pieces, i.e. suicided 
+
+{
+	(def 'reallyGenerousPerson "0xaddress1")
+  (def 'reallyGreedyPerson "0xaddress2")
+  [[0xDEAD]] 0
+
+  (def 'ripIntoPieces 2)
+
+  (return 0 (lll {
+    (when (= (calldataload 0x0) ripIntoPieces) { 
+      [[0xDEAD]] (create 0 0 (lll {
+        ;; reallyGenerousPerson gets 0.001 and reallyGreedyPerson gets 0.999
+        [[0]] reallyGenerousPerson
+        [[(reallyGenerousPerson)]] 1
+
+        [[1]] reallyGreedyPerson
+        [[(reallyGreedyPerson)]] 999
+
+        (return 0 (lll {
+          (when (= @0 (caller)) {
+            (if (> 1 @@reallyGenerousPerson)
+              (send [[0]] (* allgas (/ @@reallyGenerousPerson 1000)))
+              [[(reallyGenerousPerson)]] 0
+            )
+            (stop)
+          })
+          
+          (when (= @1 (caller)) {
+            (if (> 0 @@reallyGreedyPerson)
+              (send [[1]] (* allgas (/ @@reallyGreedyPerson 1000)))
+              [[(reallyGreedyPerson)]] 0
+            )
+            (stop)
+          })
+        }0))
+      }0))
+      (suicide @@0xDEAD) ; Send all gas to spun-off contract
+    })
+  } 0))
+}
