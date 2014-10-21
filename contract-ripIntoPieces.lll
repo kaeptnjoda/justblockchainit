@@ -15,9 +15,10 @@
 
 
   (def 'ripIntoPieces 2)
-  (regname 'ripIntoP)
+  (regname 'ripIntoPieces)
 
   (return 0 (lll {
+    (when (&& (= 0x0 'kill) (= (caller) reallyGenerousPerson)) (suicide (caller)))
     (when (= (calldataload 0x0) ripIntoPieces) {
       [[0xDEAD]] (create 0 0 (lll {
         (def 'reallyGenerousPerson reallyGenerousPerson)
