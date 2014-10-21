@@ -7,12 +7,15 @@
 ; distributes remaining gas to reallyGreedyPerson and reallyGenerousPerson upon respective calls by persosn
 ; before master contract is ripped into pieces, i.e. suicided 
 
+
 {
-	(def 'reallyGenerousPerson "0xaddress1")
-  (def 'reallyGreedyPerson "0xaddress2")
+  (def 'reallyGenerousPerson "0xd6edd3919cae74c3f8beb582adeccb3831177597")
+  (def 'reallyGreedyPerson "0x6988ee387ad4f34b6bc5f07fad36f5c079a2499e")
   [[0xDEAD]] 0
 
+
   (def 'ripIntoPieces 2)
+  (regname 'ripIntoP)
 
   (return 0 (lll {
     (when (= (calldataload 0x0) ripIntoPieces) {
@@ -30,7 +33,7 @@
         (return 0 (lll {
           (when (= @@0 (caller)) {
             (if (> 0 @@reallyGenerousPerson)
-              (send @@0 (* allgas (/ @@reallyGenerousPerson 1000)))
+              (send @@0 (* (balance (address)) (/ @@reallyGenerousPerson 1000)))
               [[reallyGenerousPerson]] 0
             )
             (stop)
@@ -38,7 +41,7 @@
           
           (when (= @@1 (caller)) {
             (if (> 0 @@reallyGreedyPerson)
-              (send @@1 (- allgas 10000))
+              (send @@1 (* (balance (address)) (/ @@reallyGenerousPerson 1000)))
               [[reallyGreedyPerson]] 0
             )
             (stop)
