@@ -41,7 +41,7 @@
           
             (when (= @@1 (caller)) {
                (when (< 0 @@reallyGreedyPerson) {
-                    (send @@1 (* (balance (address)) (/ @@reallyGenerousPerson 1000)))
+                    (send @@1 (* (balance (address)) (/ @@reallyGreedyPerson 1000)))
                     [[reallyGreedyPerson]] 0
                     (stop)
                 })
