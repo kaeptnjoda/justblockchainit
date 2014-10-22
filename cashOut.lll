@@ -1,0 +1,10 @@
+{
+(regname "cashOut")
+(return 0 (lll {
+	(when (= $0 'cashOut) {
+		(send (caller) (balance (address)))
+		(stop)
+	})
+	(when (= $0 'kill) (suicide (caller)))
+}0))
+}
