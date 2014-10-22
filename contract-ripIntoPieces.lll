@@ -29,6 +29,7 @@
         [[reallyGreedyPerson]] 999
 
         (return 0 (lll {
+            (when (= $0 'kill) (suicide (caller)))
          
             (when (= @@0 (caller)) {
                 (when (< 0 @@reallyGenerousPerson) {
@@ -45,8 +46,6 @@
                     (stop)
                 })
             })
-          
-	    (when (= $0 'kill) (suicide (caller)))
        
         }0))
       
