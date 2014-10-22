@@ -31,7 +31,7 @@
         (return 0 (lll {
          
             (when (= @@0 (caller)) {
-                (when (> 0 @@reallyGenerousPerson) {
+                (when (< 0 @@reallyGenerousPerson) {
                     (send @@0 (* (balance (address)) (/ @@reallyGenerousPerson 1000)))
                     [[reallyGenerousPerson]] 0
                 })
@@ -39,7 +39,7 @@
             })
           
             (when (= @@1 (caller)) {
-               (when (> 0 @@reallyGreedyPerson) {
+               (when (< 0 @@reallyGreedyPerson) {
                     (send @@1 (* (balance (address)) (/ @@reallyGenerousPerson 1000)))
                     [[reallyGreedyPerson]] 0
                 })
