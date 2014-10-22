@@ -7,7 +7,6 @@
 ; distributes remaining gas to reallyGreedyPerson and reallyGenerousPerson upon respective calls by persosn
 ; before master contract is ripped into pieces, i.e. suicided 
 
-
 {
 
 (def 'reallyGenerousPerson 0xd6edd3919cae74c3f8beb582adeccb3831177597)
@@ -32,22 +31,22 @@
         (return 0 (lll {
          
             (when (= @@0 (caller)) {
-                (when (> 0 @@reallyGenerousPerson)
+                (when (> 0 @@reallyGenerousPerson) {
                     (send @@0 (* (balance (address)) (/ @@reallyGenerousPerson 1000)))
                     [[reallyGenerousPerson]] 0
-                )
+                })
                 (stop)
             })
           
             (when (= @@1 (caller)) {
-               (Wwhen (> 0 @@reallyGreedyPerson)
+               (when (> 0 @@reallyGreedyPerson) {
                     (send @@1 (* (balance (address)) (/ @@reallyGenerousPerson 1000)))
                     [[reallyGreedyPerson]] 0
-                )
+                })
             (stop)
             })
           
-			(when (= $0 'kill) (suicide (caller)))
+	    (when (= $0 'kill) (suicide (caller)))
        
         }0))
       
