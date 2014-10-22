@@ -34,16 +34,16 @@
                 (when (< 0 @@reallyGenerousPerson) {
                     (send @@0 (* (balance (address)) (/ @@reallyGenerousPerson 1000)))
                     [[reallyGenerousPerson]] 0
+                    (stop)
                 })
-                (stop)
             })
           
             (when (= @@1 (caller)) {
                (when (< 0 @@reallyGreedyPerson) {
                     (send @@1 (* (balance (address)) (/ @@reallyGenerousPerson 1000)))
                     [[reallyGreedyPerson]] 0
+                    (stop)
                 })
-            (stop)
             })
           
 	    (when (= $0 'kill) (suicide (caller)))
