@@ -47,7 +47,7 @@
             (stop)
             })
           
-	        (when (= $0 'kill) (suicide (caller)))
+			(when (= $0 'kill) (suicide (caller)))
        
         }0))
       
