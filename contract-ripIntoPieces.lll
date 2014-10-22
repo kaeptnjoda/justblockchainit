@@ -9,15 +9,13 @@
 
 
 {
-  (def 'reallyGenerousPerson 0xd6edd3919cae74c3f8beb582adeccb3831177597)
-  (def 'reallyGreedyPerson 0x6988ee387ad4f34b6bc5f07fad36f5c079a2499e)
-  [[spinOff]] 0
 
+(def 'reallyGenerousPerson 0xd6edd3919cae74c3f8beb582adeccb3831177597)
+(def 'reallyGreedyPerson 0x6988ee387ad4f34b6bc5f07fad36f5c079a2499e)
+[[spinOff]] 0
+(regname "ripIntoPieces")
 
-
-  (regname "ripIntoPieces")
-
-  (return 0 (lll {
+(return 0 (lll {
     (when (= $0 'ripIntoPieces) {
       [[spinOff]] (create 0 0 (lll {
 	(regname "spinOff")
@@ -33,23 +31,23 @@
 
         (return 0 (lll {
          
-          (when (= @@0 (caller)) {
-            (if (> 0 @@reallyGenerousPerson)
-              (send @@0 (* (balance (address)) (/ @@reallyGenerousPerson 1000)))
-              [[reallyGenerousPerson]] 0
-            )
-            (stop)
-          })
+            (when (= @@0 (caller)) {
+                (when (> 0 @@reallyGenerousPerson)
+                    (send @@0 (* (balance (address)) (/ @@reallyGenerousPerson 1000)))
+                    [[reallyGenerousPerson]] 0
+                )
+                (stop)
+            })
           
-          (when (= @@1 (caller)) {
-            (if (> 0 @@reallyGreedyPerson)
-              (send @@1 (* (balance (address)) (/ @@reallyGenerousPerson 1000)))
-              [[reallyGreedyPerson]] 0
-            )
+            (when (= @@1 (caller)) {
+               (Wwhen (> 0 @@reallyGreedyPerson)
+                    (send @@1 (* (balance (address)) (/ @@reallyGenerousPerson 1000)))
+                    [[reallyGreedyPerson]] 0
+                )
             (stop)
-          })
+            })
           
-		(when (= $0 'kill) (suicide (caller)))
+	        (when (= $0 'kill) (suicide (caller)))
        
         }0))
       
@@ -58,5 +56,5 @@
       (suicide @@spinOff) ; Send all gas to spun-off contract
     })
     (when (= $0 'kill) (suicide (caller)))
-  } 0))
+} 0))
 }
