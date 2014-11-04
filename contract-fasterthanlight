@@ -4,6 +4,7 @@
 (def 'spot 25)
 [[spot]] (create 0 0 (lll {
   [[0]] 1
+  [[2]] (caller)
   (return 0 (lll {
   [[0]] (+ @@0 1)
   }0))
