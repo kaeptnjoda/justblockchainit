@@ -1,0 +1,22 @@
+;; calling primary contract with call data "kill" will kill the secondary child contract 
+;;and let the primary contract suicide
+
+{
+	[[0x00]] "primary"	
+	[[0x01]] (create 0 0 (lll {
+			[[0x00]] "secondary"
+			(return 0 (lll {
+		 			(when  (= $0 'kill) (suicide (caller)))
+						} 0))
+	} 0))
+
+	(return 0 (lll {
+				(when (= $0 'kill) 
+					{
+						[0] 'kill
+						(call allgas @@0x01 0 0 32 0 32)
+						(suicide (caller))
+					}
+				)					
+			} 0))
+}
