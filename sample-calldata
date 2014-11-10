@@ -1,0 +1,6 @@
+{
+	[ 0] "abc" 
+	[32] "def"
+	[64] "ghi"
+	(call allgas 0xcallerAddress 0 0 96 0 96)
+}
