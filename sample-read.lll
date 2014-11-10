@@ -1,0 +1,9 @@
+{
+	(returnlll{
+		[[0x01]] $0
+		[[0x02]] $32
+		[[0x03]] $64
+	    (when (&& (= $0 "kill") (= (caller) 0xcallerAddress)) (suicide (caller)))
+	})
+}
+
